@@ -2,38 +2,57 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
-    [Header("References")]
     public DialogueUI uiScript;
-
-    [Header("Dialogue Settings")]
+    public GameObject interactCanvas; // NEW: Drag your [E] InteractCanvas here
     public string characterName = "Mysterious NPC";
-
     [TextArea(3, 10)]
     public string[] dialogueLines;
 
-    [Header("Logic")]
-    public bool triggerOnce = true;
-    private bool hasTriggered = false;
+    private bool isInRange = false;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        CheckForPlayer(collision);
+        if (other.CompareTag("Player"))
+        {
+            isInRange = true;
+            Debug.Log("Player is in range to talk!");
+
+            // Show the [E] prompt when entering range
+            if (interactCanvas != null)
+            {
+                interactCanvas.SetActive(true);
+            }
+        }
     }
 
-    // This acts as a backup in case the first bump was too fast or missed
-    private void OnCollisionStay(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        CheckForPlayer(collision);
+        if (other.CompareTag("Player"))
+        {
+            isInRange = false;
+            Debug.Log("Player left the range.");
+
+            // Hide the [E] prompt when leaving range
+            if (interactCanvas != null)
+            {
+                interactCanvas.SetActive(false);
+            }
+        }
     }
 
-    private void CheckForPlayer(Collision collision)
+    void Update()
     {
-        if (!hasTriggered && collision.gameObject.CompareTag("Player"))
+        if (isInRange && Input.GetKeyDown(KeyCode.E))
         {
             if (uiScript != null)
             {
                 uiScript.TriggerDialogue(characterName, dialogueLines);
-                if (triggerOnce) hasTriggered = true;
+
+                // Optional: Hide the [E] prompt while the actual dialogue box is open
+                if (interactCanvas != null)
+                {
+                    interactCanvas.SetActive(false);
+                }
             }
         }
     }
