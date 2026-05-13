@@ -13,11 +13,10 @@ GameObject:
   - component: {fileID: 438127888770111222}
   - component: {fileID: 7832211255933897200}
   - component: {fileID: 5845863685661548792}
-  - component: {fileID: 5022237611763375408}
   - component: {fileID: 1631001758}
   m_Layer: 0
   m_Name: npc test
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,25 +113,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiScript: {fileID: 0}
-  characterName: Pellomalou
+  interactCanvas: {fileID: 7982512326578280490}
+  characterName: 
   dialogueLines:
-  - My name is Pellomalou.
-  - Welcome to Palioxori.
---- !u!114 &5022237611763375408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 454950658507500426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c37a3a68e0e4f8649ae2053961ab16cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiScript: {fileID: 0}
-  characterName: Mysterious NPC
-  dialogueLines: []
+  - 
+  - 
 --- !u!65 &1631001758
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -144,7 +129,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 3, z: 3}
+  m_Size: {x: 4, y: 4, z: 4}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2836819547657570514
 GameObject:
@@ -173,7 +158,7 @@ RectTransform:
   m_GameObject: {fileID: 2836819547657570514}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2958948670732041900}
@@ -181,7 +166,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 69.1, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8908815876930484840
@@ -330,7 +315,7 @@ Canvas:
   m_GameObject: {fileID: 7982512326578280490}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 2
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -365,7 +350,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &6734082631286291130
 MonoBehaviour:
   m_ObjectHideFlags: 0
