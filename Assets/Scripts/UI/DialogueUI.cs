@@ -1,78 +1,111 @@
 using UnityEngine;
 using TMPro;
-using System.Collections.Generic;
 using System.Collections;
 
 public class DialogueUI : MonoBehaviour
 {
+    [Header("UI References")]
+    public GameObject dialoguePanel;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
-    public float typingSpeed = 0.05f;
 
-    private Queue<string> lines = new Queue<string>();
-    private Coroutine typingCoroutine;
-    private string fullCurrentLine; // Stores the full sentence
-    private bool isTyping = false; // Tracks if we are currently "crawling" text
+    [Header("Settings")]
+    public float typingSpeed = 0.04f;
+
+    [HideInInspector] public bool isDialogueActive = false;
+    private string[] currentLines;
+    private int lineIndex;
+    private int pendingEndState;
+    private bool isTyping = false;
+    private bool canProcessInput = false; // Prevents instant skipping
 
     void Awake()
     {
-        gameObject.SetActive(false);
+        if (dialoguePanel != null) dialoguePanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
-    public void TriggerDialogue(string name, string[] dialogueLines)
+    public void TriggerDialogue(string characterName, string[] lines, int endState)
     {
-        gameObject.SetActive(true);
-        nameText.text = name;
+        if (dialoguePanel == null) return;
 
-        lines.Clear();
-        foreach (string line in dialogueLines)
-        {
-            lines.Enqueue(line);
-        }
+        isDialogueActive = true;
+        canProcessInput = false; // Disable input for a split second
+        pendingEndState = endState;
+        currentLines = lines;
+        lineIndex = 0;
+        nameText.text = characterName;
 
-        NextLine();
+        dialoguePanel.SetActive(true);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        StartCoroutine(TypeLine());
+
+        // Brief delay before the player can skip/progress
+        Invoke("EnableInput", 0.1f);
     }
 
-    public void NextLine()
+    void EnableInput() => canProcessInput = true;
+
+    void Update()
     {
-        // If we are currently typing, SKIP to the end of the sentence
-        if (isTyping)
-        {
-            StopCoroutine(typingCoroutine);
-            dialogueText.text = fullCurrentLine;
-            isTyping = false;
-            return;
-        }
+        if (!isDialogueActive || !canProcessInput) return;
 
-        // If we are NOT typing, try to get the next sentence
-        if (lines.Count == 0)
+        // Check for 'E' key OR Left Mouse Click (0)
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
         {
-            gameObject.SetActive(false);
-            return;
+            if (isTyping)
+            {
+                StopAllCoroutines();
+                dialogueText.text = currentLines[lineIndex];
+                isTyping = false;
+            }
+            else
+            {
+                NextLine();
+            }
         }
-
-        fullCurrentLine = lines.Dequeue();
-        typingCoroutine = StartCoroutine(TypeLine(fullCurrentLine));
     }
 
-    IEnumerator TypeLine(string line)
+    IEnumerator TypeLine()
     {
         isTyping = true;
         dialogueText.text = "";
-        foreach (char letter in line.ToCharArray())
+        foreach (char c in currentLines[lineIndex].ToCharArray())
         {
-            dialogueText.text += letter;
+            dialogueText.text += c;
             yield return new WaitForSeconds(typingSpeed);
         }
         isTyping = false;
     }
 
-    void Update()
+    void NextLine()
     {
-        // Handle clicking/continuing
-        if (Input.GetMouseButtonDown(0))
+        if (lineIndex < currentLines.Length - 1)
         {
-            NextLine();
+            lineIndex++;
+            StartCoroutine(TypeLine());
+        }
+        else
+        {
+            EndDialogue();
+        }
+    }
+
+    public void EndDialogue()
+    {
+        isDialogueActive = false;
+        if (dialoguePanel != null) dialoguePanel.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.storyState = pendingEndState;
         }
     }
 }
