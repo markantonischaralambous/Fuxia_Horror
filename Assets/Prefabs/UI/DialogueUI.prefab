@@ -90,9 +90,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dc4880d9227ace41917d3dfb78b7b21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialoguePanel: {fileID: 1232197357945828890}
   nameText: {fileID: 1232197356653655577}
   dialogueText: {fileID: 1232197358064219966}
   typingSpeed: 0.05
+  isDialogueActive: 0
 --- !u!1 &1232197356653655579
 GameObject:
   m_ObjectHideFlags: 0

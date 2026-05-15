@@ -13,11 +13,11 @@ public class DialogueUI : MonoBehaviour
     public float typingSpeed = 0.04f;
 
     [HideInInspector] public bool isDialogueActive = false;
-    private string[] currentLines;
+    private DialogueLine[] currentLines;
     private int lineIndex;
     private int pendingEndState;
     private bool isTyping = false;
-    private bool canProcessInput = false; // Prevents instant skipping
+    private bool canProcessInput = false;
 
     void Awake()
     {
@@ -26,25 +26,21 @@ public class DialogueUI : MonoBehaviour
         Cursor.visible = false;
     }
 
-    public void TriggerDialogue(string characterName, string[] lines, int endState)
+    public void TriggerDialogue(string characterName, DialogueLine[] lines, int endState)
     {
         if (dialoguePanel == null) return;
 
         isDialogueActive = true;
-        canProcessInput = false; // Disable input for a split second
+        canProcessInput = false;
         pendingEndState = endState;
         currentLines = lines;
         lineIndex = 0;
-        nameText.text = characterName;
 
         dialoguePanel.SetActive(true);
-
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        StartCoroutine(TypeLine());
-
-        // Brief delay before the player can skip/progress
+        StartCoroutine(DisplayCurrentLine());
         Invoke("EnableInput", 0.1f);
     }
 
@@ -54,13 +50,12 @@ public class DialogueUI : MonoBehaviour
     {
         if (!isDialogueActive || !canProcessInput) return;
 
-        // Check for 'E' key OR Left Mouse Click (0)
         if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
         {
             if (isTyping)
             {
                 StopAllCoroutines();
-                dialogueText.text = currentLines[lineIndex];
+                dialogueText.text = currentLines[lineIndex].text;
                 isTyping = false;
             }
             else
@@ -70,11 +65,13 @@ public class DialogueUI : MonoBehaviour
         }
     }
 
-    IEnumerator TypeLine()
+    IEnumerator DisplayCurrentLine()
     {
         isTyping = true;
         dialogueText.text = "";
-        foreach (char c in currentLines[lineIndex].ToCharArray())
+        nameText.text = currentLines[lineIndex].actorName;
+
+        foreach (char c in currentLines[lineIndex].text.ToCharArray())
         {
             dialogueText.text += c;
             yield return new WaitForSeconds(typingSpeed);
@@ -87,7 +84,7 @@ public class DialogueUI : MonoBehaviour
         if (lineIndex < currentLines.Length - 1)
         {
             lineIndex++;
-            StartCoroutine(TypeLine());
+            StartCoroutine(DisplayCurrentLine());
         }
         else
         {

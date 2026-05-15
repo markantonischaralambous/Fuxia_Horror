@@ -114,10 +114,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiScript: {fileID: 0}
   interactCanvas: {fileID: 7982512326578280490}
-  characterName: 
-  dialogueLines:
-  - 
-  - 
+  characterName: Foushekkas
+  introLines:
+  - actorName: 
+    text: 
+  - actorName: 
+    text: 
+  - actorName: 
+    text: 
+  questActiveLines:
+  - actorName: 
+    text: 
+  questDoneLines:
+  - actorName: 
+    text: 
+  givesQuest: 1
+  stateToSetOnTalk: 1
+  reminderLines: []
+  hasTalkedInCurrentState: 0
 --- !u!65 &1631001758
 BoxCollider:
   m_ObjectHideFlags: 0
