@@ -322,6 +322,131 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1001 &661057465
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5140194602878516825}
+    m_Modifications:
+    - target: {fileID: 454950658507500426, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: m_Name
+      value: npc test (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549373882691308489, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549373882691308489, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549373882691308489, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549373882691308489, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549373882691308489, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549373882691308489, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549373882691308489, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549373882691308489, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549373882691308489, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549373882691308489, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549373882691308489, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: uiScript
+      value: 
+      objectReference: {fileID: 739905470}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: givesQuest
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: stateToSetOnTalk
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: introLines.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: reminderLines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: introLines.Array.data[0].text
+      value: So you're the visitor?
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: introLines.Array.data[1].text
+      value: Go talk to Pellomalou.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: introLines.Array.data[2].text
+      value: You found it? Good work!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: reminderLines.Array.data[0].text
+      value: I told you what to do already.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: questDoneLines.Array.data[0].text
+      value: You found it? Good work!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: introLines.Array.data[0].actorName
+      value: Foushekkas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: introLines.Array.data[1].actorName
+      value: Foushekkas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: introLines.Array.data[2].actorName
+      value: Foushekkas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: questActiveLines.Array.data[0].text
+      value: You are looking for the torch? Good luck.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: reminderLines.Array.data[0].actorName
+      value: Foushekkas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: questDoneLines.Array.data[0].actorName
+      value: Foushekkas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: questActiveLines.Array.data[0].actorName
+      value: Foushekkas
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
 --- !u!224 &739905469 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1232197356383919183, guid: 00787b4b2660d834d85b5f2fce4f2af4, type: 3}
@@ -534,6 +659,11 @@ Transform:
   m_Father: {fileID: 1913929788}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1306142845 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4549373882691308489, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+  m_PrefabInstance: {fileID: 661057465}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1439025820
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,11 +736,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4549373882691308489, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
   m_PrefabInstance: {fileID: 657398191221155841}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1703934733 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1232197357945828890, guid: 00787b4b2660d834d85b5f2fce4f2af4, type: 3}
-  m_PrefabInstance: {fileID: 1232197356853285874}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1820819926
 GameObject:
@@ -909,56 +1034,52 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 739905470}
     - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
-      propertyPath: givesQuest
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
       propertyPath: characterName
-      value: Foushekkas
-      objectReference: {fileID: 0}
-    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
-      propertyPath: introLines.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
-      propertyPath: defaultLines.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
-      propertyPath: introLines.Array.data[0]
-      value: Hello, my name is Foushekkas.
-      objectReference: {fileID: 0}
-    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
-      propertyPath: introLines.Array.data[1]
-      value: Welcome to Palioxori.
-      objectReference: {fileID: 0}
-    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
-      propertyPath: introLines.Array.data[2]
-      value: I've lost my flashlight, could you help me find it?
-      objectReference: {fileID: 0}
-    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
-      propertyPath: questDoneLines.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
-      propertyPath: defaultLines.Array.data[0]
-      value: Welcome, my name is foushekkas. Could you find me the item?
+      value: Pellomalou
       objectReference: {fileID: 0}
     - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
       propertyPath: questActiveLines.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
-      propertyPath: reminderLines.Array.data[0]
-      value: I've told you all for now.
+      propertyPath: introLines.Array.data[0].text
+      value: Hello, im Pellomalou, help me find the torch.
       objectReference: {fileID: 0}
     - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
-      propertyPath: questDoneLines.Array.data[0]
-      value: Thank you so much!
+      propertyPath: introLines.Array.data[1].text
+      value: Where was it last seen?
       objectReference: {fileID: 0}
     - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
-      propertyPath: questActiveLines.Array.data[0]
-      value: Did you find it?
+      propertyPath: introLines.Array.data[2].text
+      value: Near the church, go look.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: questDoneLines.Array.data[0].text
+      value: You found it! Keep it, you will need it more than me.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: introLines.Array.data[0].actorName
+      value: Pellomalou
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: introLines.Array.data[1].actorName
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: introLines.Array.data[2].actorName
+      value: Pellomalou
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: questActiveLines.Array.data[0].text
+      value: Dont just stand there, go look.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: questDoneLines.Array.data[0].actorName
+      value: Pellomalou
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845863685661548792, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
+      propertyPath: questActiveLines.Array.data[0].actorName
+      value: Pellomalou
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43d2733b9089d674882d303d95f64c7e, type: 3}
@@ -969,10 +1090,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 94305915}
     m_Modifications:
-    - target: {fileID: 1232197356383919180, guid: 00787b4b2660d834d85b5f2fce4f2af4, type: 3}
-      propertyPath: dialoguePanel
-      value: 
-      objectReference: {fileID: 1703934733}
     - target: {fileID: 1232197356383919182, guid: 00787b4b2660d834d85b5f2fce4f2af4, type: 3}
       propertyPath: m_Name
       value: DialogueUI
@@ -1092,6 +1209,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1631001752}
+  - {fileID: 1306142845}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
