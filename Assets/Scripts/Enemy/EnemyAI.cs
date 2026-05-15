@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -21,17 +22,18 @@ public class EnemyAI : MonoBehaviour
     public float waypointStopDistance = 0.5f;
 
     [Header("Attack")]
-    public float attackDamage = 10f;
     public float attackCooldown = 1.5f;
     private float lastAttackTime;
 
     private NavMeshAgent agent;
     private Transform player;
+    private Vector3 spawnPoint;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        spawnPoint = transform.position;
         GoToNextWaypoint();
     }
 
@@ -97,8 +99,23 @@ public class EnemyAI : MonoBehaviour
 
     void DealDamage()
     {
-        Debug.Log($"Enemy attacked player for {attackDamage} damage");
-        // player.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
+        DeathManager.Instance.TriggerDeath();
+    }
+
+    public void ResetEnemy()
+    {
+        StartCoroutine(ResetCoroutine());
+    }
+
+    IEnumerator ResetCoroutine()
+    {
+        agent.enabled = false;
+        transform.position = spawnPoint;
+        yield return null; // wait one frame
+        agent.enabled = true;
+        currentState = State.Patrol;
+        waypointIndex = 0;
+        GoToNextWaypoint();
     }
 
     void EnterPatrol()
