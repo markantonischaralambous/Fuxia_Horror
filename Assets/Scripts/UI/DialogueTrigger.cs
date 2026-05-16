@@ -4,24 +4,25 @@ public class DialogueTrigger : MonoBehaviour
 {
     [Header("References")]
     public DialogueUI uiScript;
-    public GameObject interactCanvas;
+    public GameObject interactCanvas; // The [E] UI Prompt to talk
 
-    [Header("NPC Info")]
-    public string characterName = "NPC";
+    [Header("NPC Settings")]
+    public string characterName = "NPC"; // FIXED: Re-added this missing variable!
 
-    [Header("Dialogue Variations")]
-    // Changed from string[] to DialogueLine[] to fix error in image_f9065c.png
-    public DialogueLine[] introLines;
-    public DialogueLine[] questActiveLines;
-    public DialogueLine[] questDoneLines;
+    [Header("NPC Role (Pick One Only)")]
+    public bool isNPC_A = true;       // True for NPC A (Lantern)
+    public bool isNPC_B = false;      // True for NPC B (5 Items)
+    public bool isFlavorNPC = false;  // True for the 3rd NPC (No Quests)
 
-    [Header("Quest Settings")]
-    public bool givesQuest = false;
-    public int stateToSetOnTalk = 1;
+    [Header("Dialogue Arrays (5 States)")]
+    public DialogueLine[] state0Lines; // Game Start / Intro
+    public DialogueLine[] state1Lines; // Quest 1 Active (Lantern hunting)
+    public DialogueLine[] state2Lines; // Quest 1 Turn-in / Quest 2 Setup
+    public DialogueLine[] state3Lines; // Quest 2 Active (5 items hunting)
+    public DialogueLine[] state4Lines; // Quest 2 Turn-in
+    public DialogueLine[] state5Lines; // Game Complete / Ending Banter
 
-    [Header("Repetition Handling")]
-    public DialogueLine[] reminderLines;
-
+    private DialogueLine[] lastSpokenLines;
     [HideInInspector] public bool hasTalkedInCurrentState = false;
     private bool isInRange = false;
 
@@ -57,33 +58,61 @@ public class DialogueTrigger : MonoBehaviour
     void HandleInteraction()
     {
         int currentState = GameManager.instance.storyState;
+        DialogueLine[] lines = GetLinesForState(currentState);
 
+        // Safety check to prevent IndexOutOfRangeException (image_604cff.png)
+        if (lines == null || lines.Length == 0)
+        {
+            if (lastSpokenLines != null && lastSpokenLines.Length > 0)
+            {
+                lines = lastSpokenLines;
+            }
+            else
+            {
+                Debug.LogWarning($"{gameObject.name} has nothing to say during State {currentState}. Skip.");
+                return;
+            }
+        }
+
+        lastSpokenLines = lines;
+        int nextState = currentState;
+
+        // --- EXPLICIT NARRATIVE PROGRESSION ---
         if (!hasTalkedInCurrentState)
         {
-            DialogueLine[] lines = GetLinesForState(currentState);
-
-            int nextState = currentState;
-            if (givesQuest && currentState < stateToSetOnTalk)
+            if (isNPC_A)
             {
-                nextState = stateToSetOnTalk;
+                if (currentState == 0) nextState = 1; // Start Quest 1
+                if (currentState == 2) nextState = 3; // Turn in Quest 1 -> Unlock Quest 2
+                hasTalkedInCurrentState = true;
             }
+            else if (isNPC_B)
+            {
+                if (currentState == 4) nextState = 5; // Turn in Quest 2 -> Finish Game
+                hasTalkedInCurrentState = true;
+            }
+            else if (isFlavorNPC)
+            {
+                nextState = currentState; // Doesn't alter states
+            }
+        }
 
-            // Now sending the correct DialogueLine[] type
-            uiScript.TriggerDialogue(characterName, lines, nextState);
-            hasTalkedInCurrentState = true;
-        }
-        else
-        {
-            uiScript.TriggerDialogue(characterName, reminderLines, currentState);
-        }
+        uiScript.TriggerDialogue(characterName, lines, nextState);
 
         if (interactCanvas != null) interactCanvas.SetActive(false);
     }
 
     DialogueLine[] GetLinesForState(int state)
     {
-        if (state == 1) return questActiveLines;
-        if (state >= 2) return questDoneLines;
-        return introLines;
+        switch (state)
+        {
+            case 0: return state0Lines;
+            case 1: return state1Lines;
+            case 2: return state2Lines;
+            case 3: return state3Lines;
+            case 4: return state4Lines;
+            case 5: return state5Lines;
+            default: return null;
+        }
     }
 }

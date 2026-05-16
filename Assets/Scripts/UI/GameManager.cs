@@ -4,27 +4,40 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    // This makes it show up in your Inspector (Screenshot 2026-05-14 214918.png)
-    [SerializeField] private int _storyState = 0;
+    // Track the 5 narrative states (0 to 5)
+    private int _storyState = 0;
 
     public int storyState
     {
         get { return _storyState; }
         set
         {
-            _storyState = value;
-            NotifyNPCsOfStateChange();
+            if (_storyState != value)
+            {
+                _storyState = value;
+                Debug.Log("Story State Updated to: " + _storyState);
+                NotifyNPCsOfStateChange();
+            }
         }
     }
 
     void Awake()
     {
-        if (instance == null) instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
+    // Loops through the scene and refreshes NPCs when the state moves forward
     void NotifyNPCsOfStateChange()
     {
-        DialogueTrigger[] npcs = FindObjectsOfType<DialogueTrigger>();
+        DialogueTrigger[] npcs = FindObjectsByType<DialogueTrigger>(FindObjectsSortMode.None);
         foreach (DialogueTrigger npc in npcs)
         {
             npc.ResetTalkStatus();

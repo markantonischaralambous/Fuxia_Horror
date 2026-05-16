@@ -114,20 +114,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiScript: {fileID: 0}
   interactCanvas: {fileID: 7982512326578280490}
-  characterName: Foushekkas
+  characterName: Pellomalou
   introLines:
-  - actorName: 
-    text: 
-  - actorName: 
-    text: 
-  - actorName: 
-    text: 
+  - actorName: Pellomalou
+    text: Hello, im Pellomalou, help me find the torch.
+  - actorName: Player
+    text: Where was it last seen?
+  - actorName: Pellomalou
+    text: Near the church, go look.
   questActiveLines:
-  - actorName: 
-    text: 
+  - actorName: Pellomalou
+    text: Dont just stand there, go look.
   questDoneLines:
-  - actorName: 
-    text: 
+  - actorName: Pellomalou
+    text: You found it! Keep it, you will need it more than me.
   givesQuest: 1
   stateToSetOnTalk: 1
   reminderLines: []
