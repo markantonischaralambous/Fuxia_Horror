@@ -10,6 +10,7 @@ public class DeathManager : MonoBehaviour
     public Transform player;
     public EnemyAI enemy;
     public TMP_Text youDiedText;
+    public bool isDead = false;
 
     private Vector3 playerSpawnPoint;
 
@@ -26,6 +27,8 @@ public class DeathManager : MonoBehaviour
 
     public void TriggerDeath()
     {
+        if (isDead) return;
+        isDead = true;
         StartCoroutine(DeathSequence());
     }
 
@@ -41,11 +44,11 @@ public class DeathManager : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
 
-        // Teleport player
         player.position = playerSpawnPoint;
 
-        // Reset enemy
-        enemy.ResetEnemy();
+        yield return StartCoroutine(enemy.ResetCoroutine());
+
+        isDead = false;
 
         cc.enabled = true;
         pc.enabled = true;

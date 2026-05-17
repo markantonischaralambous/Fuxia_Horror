@@ -39,6 +39,8 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
+        if (DeathManager.Instance.isDead) return;
+
         float distToPlayer = Vector3.Distance(transform.position, player.position);
 
         switch (currentState)
@@ -107,11 +109,11 @@ public class EnemyAI : MonoBehaviour
         StartCoroutine(ResetCoroutine());
     }
 
-    IEnumerator ResetCoroutine()
+    public IEnumerator ResetCoroutine()
     {
         agent.enabled = false;
         transform.position = spawnPoint;
-        yield return null; // wait one frame
+        yield return null;
         agent.enabled = true;
         currentState = State.Patrol;
         waypointIndex = 0;
