@@ -3,15 +3,15 @@ using UnityEngine;
 public class QuestPlacementZone : MonoBehaviour
 {
     [Header("References")]
-    public GameObject interactPrompt;   // The [E] UI Canvas or Text above the table
-    public GameObject visualAsset;      // The child Cube model that is hidden at start
+    public GameObject interactPrompt;
+    public GameObject visualAsset;
 
     [Header("Quest Settings")]
-    public int targetStateNeeded = 3;     // Must be on Quest 2 (State 3) to place items
-    public int nextStoryState = 4;        // Sets game to State 4 when all 5 are placed
+    public int targetStateNeeded = 3;
+    public int nextStoryState = 4;
 
-    // SHARED SYSTEM COUNTER
-    private static int itemsPlaced = 0;   // 'static' means all tables share this exact counter
+    // GLOBAL STATICS
+    private static int totalTablesFilled = 0;
     public int totalItemsNeeded = 5;
 
     private bool isPlayerInRange = false;
@@ -20,19 +20,19 @@ public class QuestPlacementZone : MonoBehaviour
     void Start()
     {
         if (interactPrompt != null) interactPrompt.SetActive(false);
-        if (visualAsset != null) visualAsset.SetActive(false); // Make sure cube starts hidden
-
-        // Reset the static counter whenever the scene loads fresh
-        itemsPlaced = 0;
+        if (visualAsset != null) visualAsset.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // Only trigger if the player walks in, the game is in State 3, and a cube isn't already here
+        // Check if game is in State 3, table is empty, AND player has an item in hand
         if (other.CompareTag("Player") && GameManager.instance.storyState == targetStateNeeded && !isAlreadyPlaced)
         {
-            isPlayerInRange = true;
-            if (interactPrompt != null) interactPrompt.SetActive(true);
+            if (QuestObjective.playerInventoryCount > 0)
+            {
+                isPlayerInRange = true;
+                if (interactPrompt != null) interactPrompt.SetActive(true);
+            }
         }
     }
 
@@ -47,10 +47,13 @@ public class QuestPlacementZone : MonoBehaviour
 
     void Update()
     {
-        // Press E to place the item down
+        // Only allow placement if player is holding something
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E) && !isAlreadyPlaced)
         {
-            PlaceItem();
+            if (QuestObjective.playerInventoryCount > 0)
+            {
+                PlaceItem();
+            }
         }
     }
 
@@ -58,22 +61,21 @@ public class QuestPlacementZone : MonoBehaviour
     {
         isAlreadyPlaced = true;
         isPlayerInRange = false;
-
         if (interactPrompt != null) interactPrompt.SetActive(false);
 
-        // VISUAL MAGIC: Make your Blender cube appear on the table!
-        if (visualAsset != null)
-        {
-            visualAsset.SetActive(true);
-        }
+        // Take 1 item out of player's hands
+        QuestObjective.playerInventoryCount--;
 
-        itemsPlaced++;
-        Debug.Log($"Cube placed! Total on tables: {itemsPlaced} / {totalItemsNeeded}");
+        // Show the item on the table
+        if (visualAsset != null) visualAsset.SetActive(true);
 
-        // If this was the 5th and final cube, unlock the turn-in phase for NPC B
-        if (itemsPlaced >= totalItemsNeeded)
+        totalTablesFilled++;
+        Debug.Log($"Placed on table! Total filled: {totalTablesFilled} / {totalItemsNeeded}. Remaining in pockets: {QuestObjective.playerInventoryCount}");
+
+        // If this was the final table, trigger NPC B's turn-in state
+        if (totalTablesFilled >= totalItemsNeeded)
         {
-            Debug.Log("All 5 items placed! Story state updated to 4. Go speak to NPC B.");
+            Debug.Log("All 5 tables filled one-by-one! Head back to NPC B.");
             GameManager.instance.storyState = nextStoryState;
         }
     }
