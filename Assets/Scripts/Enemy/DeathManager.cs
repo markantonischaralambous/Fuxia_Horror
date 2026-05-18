@@ -11,6 +11,7 @@ public class DeathManager : MonoBehaviour
     public EnemyAI enemy;
     public TMP_Text youDiedText;
     public bool isDead = false;
+    public JumpScare jumpScare;
 
     private Vector3 playerSpawnPoint;
 
@@ -34,6 +35,8 @@ public class DeathManager : MonoBehaviour
 
     IEnumerator DeathSequence()
     {
+        jumpScare.PlayJumpScare();
+        yield return new WaitForSeconds(2f); // wait for jumpscare to finish
         youDiedText.gameObject.SetActive(true);
 
         CharacterController cc = player.GetComponent<CharacterController>();
