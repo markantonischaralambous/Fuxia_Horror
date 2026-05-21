@@ -1,4 +1,4 @@
-# Mestin Xora - Updated Game Notes
+# Aigia Fouxia - Game Notes
 
 Updated: 2026-05-21
 
